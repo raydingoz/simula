@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasta Bilgi ve Test Sonuçları</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Hasta Bilgi ve Test Sonuçları</h1>
+    </header>
+
+    <main>
+        <section id="patient-info">
+            <h2>Hasta Bilgileri</h2>
+            <label for="patientId">Hasta ID:</label>
+            <input type="text" id="patientId">
+            <button onclick="getPatientInfo()">Bilgileri Getir</button>
+            <button onclick="getRandomPatient()">Rastgele Hasta Getir</button>
+            <div id="patientDetails"></div>
+        </section>
+
+       <section id="test-results">
+    <h2>Test Sonuçları</h2>
+    <label for="testNameSelect">Test Adı Seçin:</label>
+    <select id="testNameSelect">
+        <option value="tamKanSayimi">Tam Kan Sayımı</option>
+        <option value="biyokimya">Biyokimya</option>
+        <!-- Diğer test adı seçeneklerini buraya ekleyebilirsiniz -->
+    </select>
+    <button onclick="getTestResult()">Sonucu Getir</button>
+    <table id="testResultTable"></table>
+</section>
+
+<section id="examination-results">
+    <h2>Muayene Sonuçları</h2>
+    <label for="examinationNameSelect">Muayene Adı Seçin:</label>
+    <select id="examinationNameSelect">
+        <option value="karinMuayenesi">Karın Muayenesi</option>
+        <option value="nörolojikMuayene">Nörolojik Muayene</option>
+        <!-- Diğer muayene adı seçeneklerini buraya ekleyebilirsiniz -->
+    </select>
+    <button onclick="getExaminationResult()">Sonucu Getir</button>
+    <table id="examinationResultTable"></table>
+</section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
