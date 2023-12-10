@@ -1,81 +1,369 @@
-body {
-    font-family: Arial, sans-serif;
+﻿/* Reset CSS */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-header {
-    background-color: #333;
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #111; /* Daha koyu siyah */
     color: #fff;
-    text-align: center;
-    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
+/* Main Styles */
 main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
+    width: 50%; /* Ekranın %50'si */
 }
 
+/* General Section Styles */
 section {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input,
-select,
-button {
-    margin-bottom: 10px;
-}
-
-button {
-    padding: 8px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #555;
-}
-
-#patientDetails,
-#testResult,
-#examinationResult {
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
+    background-color: #222; /* Daha koyu gri */
+    color: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
 }
 
 h2 {
-    border-bottom: 2px solid #333;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
+    color: #fff;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+label, button, select {
     margin-top: 10px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #82222b; /* Daha koyu bordo */
+}
+
+/* Header */
+header {
+    font-size: 10px;
+    color: white;
+    text-align: left;
+    padding: 1em;
+    flex: 1;
+}
+
+/* Timer Container */
+#timer-container {
+    display: flex;
+    font-size: 1*px;
+    align-items: center;
+}
+
+.timer-content {
+    margin-right: 20px;
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+}
+
+.secenekler {
+    position: fixed;
+    right: 10px;
+    top: 80px;
+    max-width: 400px;
+    width: 100%;
+    padding: 10px;
+    height: auto;
+    background-color: #111; /* Daha koyu siyah */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.secenek {
+    background-color: #444; /* Daha koyu gri */
+    padding: 20px;
+    display: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+    .secenek:hover {
+        transform: scale(1.05);
+    }
+
+    /* Gösterilen seçeneği görünür yap */
+    .secenek.show {
+        display: block;
+    }
+
+label {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+select, button {
+    margin-top: 10px;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #1a1a1a; /* Daha koyu siyah */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    select:hover, button:hover {
+        background-color: #444; /* Daha koyu gri */
+    }
+
+button {
+    width: 100%;
+}
+
+/* Monitor Container */
+.monitor {
+    position: fixed;
+    left: 10px;
+    top: 80px;
+    transform: none;
+    max-width: 400px;
+    width: 100%;
+    margin: 10px;
+    height: auto;
+    background-color: #050505; /* Daha koyu siyah */
+    border: 4px solid #333; /* Daha koyu siyah */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.screen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vitals {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 8px;
+}
+
+.vital {
+    text-align: left;
+    background-color: #020202;
+    box-shadow: inset 0 0 5px rgba(5, 5, 5, 0.8);
+    margin-bottom: 8px;
+}
+
+.label {
+    display: block;
+    font-size: 12px;
+    color: #ccc;
+}
+
+.value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Roboto Mono', monospace;
+}
+
+    .value.nabiz {
+        color: #ff3333;
+    }
+
+    .value.tansiyon {
+        color: #66ccff;
+    }
+
+    .value.saturasyon {
+        color: #ffff66;
+    }
+
+canvas {
+    background-color: #101010; /* Daha koyu siyah */
+    display: block;
+    margin: 10px;
+    margin-right: 30px;
+}
+
+/* Emergency Monitor */
+.emergency-monitor {
+    background-color: #0a0a0a; /* Daha koyu siyah */
+    border-color: #c0392b; /* Daha koyu bordo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+button {
+    background-color: #82222b; /* Daha koyu bordo */
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+    button:hover {
+        background-color: #922b21; /* Daha koyu bordo */
+    }
+
+/* Input Styles */
+input[type="text"] {
+    padding: 12px;
+    width: calc(100% - 24px);
+    margin-bottom: 12px;
+}
+
+/* Select Styles */
+select {
+    padding: 12px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
 }
 
 th, td {
-    padding: 8px;
+    border: 1px solid #ddd;
+    padding: 12px;
     text-align: left;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #82222b; /* Daha koyu bordo */
+    color: white;
 }
 
-/* Daha fazla stil ekleyebilirsiniz */
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Hafif saydamlık ekledi */
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.9); /* Beyaz arka plan */
+    color: #333; /* Daha koyu gri metin rengi */
+    margin: 5% auto;
+    padding: 24px;
+    border: none; /* Kenarlık kaldırıldı */
+    border-radius: 8px; /* Köşeleri yuvarlatıldı */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Hafif bir gölge eklendi */
+    width: 80%;
+}
+
+.close {
+    color: #555; /* Daha koyu gri kapatma simgesi rengi */
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #333; /* Daha koyu kapatma simgesi rengi hover durumunda */
+    }
+
+/* General Mobile Styles */
+@media screen and (max-width: 768px) {
+    body {
+    }
+
+    .header-container {
+        text-align: right;
+    }
+
+    header {
+        text-align: left;
+    }
+
+    .timer-content {
+        margin-bottom: 10px;
+        text-align: right;
+    }
+
+    .button-content {
+        width: 100%;
+    }
+
+    .emergency-monitor, .monitor, .secenekler {
+        width: 100%;
+        margin: 0;
+    }
+
+    .monitor {
+        position: static; /* or position: relative; depending on your layout */
+        transform: none;
+        transform: scaleY(0.8);
+    }
+
+    canvas {
+        margin: 10px 0;
+    }
+
+    .label {
+        font-size: 14px;
+    }
+
+    .value {
+        font-size: 16px;
+    }
+
+    .secenekler {
+        position: relative;
+        right: auto;
+        top: auto;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .secenek {
+        border-radius: 0;
+    }
+
+    main {
+        width: 100%; /* Ekranın %50'si */
+    }
+}
+
+/* Butonlar Container */
+.butonlar button {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+}
+
+    .butonlar button i {
+        margin-right: 10px; /* İkon ile metin arasındaki boşluğu ayarlamak için gerektiğinde değeri ayarlayın */
+        align-self: flex-start; /* Simgeyi üste hizalar */
+    }
