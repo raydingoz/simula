@@ -200,10 +200,10 @@ var stemi = [
     1, -1, 0, -1, 0, -3, -5, -6, -8, -8, -7, -7, -5, -4, -3, -2, -1,
     // QRS dalga
     0, 1, 2, 3, 4, 6, 8, 10, -16, -50, -25,
-    -15,
+    -20,
     // ST yükselmesi (daha uzun ve daha belirgin)
-    -13, -13, -14, -15, -16, -20, -25, -26, -28, -30, -32, -34, -33, -33, -34,
-    -35, -36, -40, -40, -40, -40, -40, -40, -40, -40, -40, -38, -37, -37, -36, -35, -28, -25,
+    -18, -19, -20, -21, -22, -24, -25, -26, -28, -30, -32, -32, -33, -33, -34,
+    -35, -36, -40, -40, -40, -40, -40, -40, -40, -38, -37, -37, -36, -35, -28, -25,
     -20, -18, -15, -10, -5, 0,
     // T dalga
     0, 1, -1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 0, 0, 0, 1, -1,
@@ -211,10 +211,10 @@ var stemi = [
     1, -1, 0, -1, 0, -3, -5, -6, -8, -8, -7, -7, -5, -4, -3, -2, -1,
     // QRS dalga
     0, 1, 2, 3, 4, 6, 8, 10, -16, -50, -25,
-    -15,
+    -20,
     // ST yükselmesi (daha uzun ve daha belirgin)
-    -13, -13, -14, -15, -16, -20, -25, -26, -28, -30, -32, -34, -33, -33, -34,
-    -35, -36, -40, -40, -40, -40, -40, -40, -40, -40, -40, -38, -37, -37, -36, -35, -28, -25,
+    -18, -19, -20, -21, -22, -24, -25, -26, -28, -30, -32, -32, -33, -33, -34,
+    -35, -36, -40, -40, -40, -40, -40, -40, -40, -38, -37, -37, -36, -35, -28, -25,
     -20, -18, -15, -10, -5, 0,
     // T dalga
     0, 1, -1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 0, 0, 0, 1, -1,
@@ -222,10 +222,10 @@ var stemi = [
     1, -1, 0, -1, 0, -3, -5, -6, -8, -8, -7, -7, -5, -4, -3, -2, -1,
     // QRS dalga
     0, 1, 2, 3, 4, 6, 8, 10, -16, -50, -25,
-    -15,
+    -20,
     // ST yükselmesi (daha uzun ve daha belirgin)
-    -13, -13, -14, -15, -16, -20, -25, -26, -28, -30, -32, -34, -33, -33, -34,
-    -35, -36, -40, -40, -40, -40, -40, -40, -40, -40, -40, -38, -37, -37, -36, -35, -28, -25,
+    -18, -19, -20, -21, -22, -24, -25, -26, -28, -30, -32, -32, -33, -33, -34,
+    -35, -36, -40, -40, -40, -40, -40, -40, -40, -38, -37, -37, -36, -35, -28, -25,
     -20, -18, -15, -10, -5, 0,
     // T dalga
     0, 1, -1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 0, 0, 0, 1, -1,
@@ -233,10 +233,10 @@ var stemi = [
     1, -1, 0, -1, 0, -3, -5, -6, -8, -8, -7, -7, -5, -4, -3, -2, -1,
     // QRS dalga
     0, 1, 2, 3, 4, 6, 8, 10, -16, -50, -25,
-    -15,
+    -20,
     // ST yükselmesi (daha uzun ve daha belirgin)
-    -13, -13, -14, -15, -16, -20, -25, -26, -28, -30, -32, -34, -33, -33, -34,
-    -35, -36, -40, -40, -40, -40, -40, -40, -40, -40, -40, -38, -37, -37, -36, -35, -28, -25,
+    -18, -19, -20, -21, -22, -24, -25, -26, -28, -30, -32, -32, -33, -33, -34,
+    -35, -36, -40, -40, -40, -40, -40, -40, -40, -38, -37, -37, -36, -35, -28, -25,
     -20, -18, -15, -10, -5, 0,
     // T dalga
     0, 1, -1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 0, 0, 0, 1, -1,
@@ -245,6 +245,7 @@ var stemi = [
 
 
 ];
+var stop = [];
 
 
 var data = [];
@@ -258,13 +259,11 @@ for (var i = 0; i < 400; i++) {
 // VF simülasyonu sona erdiðinde sýfýrla
 data.push(0);
 
-data = stemi;
 
 
 var canvasWidth = canvas.width;
 var canvasHeight = canvas.height;
 var maxTrails = 50;
-drawWave();
 // Ýzlerin maksimum sayýsý
 
 function drawWave() {
@@ -339,4 +338,39 @@ function drawWave() {
         // Animasyonu sürdür
         setTimeout(drawWave, 500 / fps);
     });
+}
+
+function ekgCiz(ritim) {
+    const patientId = document.getElementById("patientId").value;
+    /*
+    fetch(`/getVitalResult/${patientId}/${ritim}`)
+        .then(response => response.json())
+        .then(result => {
+            // Daha önce seçilen testleri güncelle
+
+            data = getVitalResult(result);
+            drawWave();
+        })
+        .catch(error => console.error('Error:', error));
+        */
+    data = getVitalResult(ritim);
+    drawWave();
+}
+
+function getVitalResult(ritimTuru) {
+    // Burada ritim türüne göre uygun veriyi çek ve döndür
+    if (ritimTuru === "sinus") {
+        // Sinus ritmi verisi çekme iþlemi
+        return sinusRitmi;
+    } else if (ritimTuru === "af") {
+        // Atrial fibrillation verisi çekme iþlemi
+        return atrialFibrillation;
+    } else if (ritimTuru === "stop") {
+        // Atrial fibrillation verisi çekme iþlemi
+        return stop;
+    } else {
+        // Bilinmeyen ritim türü durumu
+        console.error("Bilinmeyen ritim türü: ", ritimTuru);
+        return sinusRitmi;
+    }
 }

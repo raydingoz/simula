@@ -5,178 +5,185 @@ const app = express();
 const port = 3000;
 
 const patientsDatabase = [
-    {
-        "id": 1,
-        "name": "Ahmet Yılmaz",
-        "yas": "35",
-        "correctDiagnosis": "Tanı 1", 
-        "testResults": {
-            "Tam Kan Sayımı": [
-                { "parametre": "RBC", "sonuc": 5 },
-                { "parametre": "HGB", "sonuc": 13 },
-                { "parametre": "PLT", "sonuc": 140 },
-                { "parametre": "MCV", "sonuc": 100 }
-            ],
-            "Biyokimya": [
-                { "parametre": "ALT", "sonuc": 25 },
-                { "parametre": "AST", "sonuc": 30 },
-                { "parametre": "GLukoz", "sonuc": 120 },
-            ]
-        },
-        "examinationResults": {
-            "karinMuayenesi": [
-                { "parametre": "Karaciğer", "sonuc": "Normal" },
-                { "parametre": "Dalak", "sonuc": "Normal" }
-            ],
-            "nörolojikMuayene": [
-                { "parametre": "Refleks", "sonuc": "Normal" },
-                { "parametre": "Bilinç", "sonuc": "Normal" }
-            ]
-        }
-    },
-    {
-        "id": 2,
-        "name": "Ayşe Demir",
-        "yas": "35",
-        "correctDiagnosis": "Tanı 2", 
-        "testResults": {
-            "Tam Kan Sayımı": [
-                { "parametre": "RBC", "sonuc": "4.8" },
-                { "parametre": "HGB", "sonuc": "12.5" },
-                { "parametre": "PLT", "sonuc": "150" }
-            ],
-            "Biyokimya": [
-                { "parametre": "Glukoz", "sonuc": "95" },
-                { "parametre": "ALT", "sonuc": "30" },
-                { "parametre": "AST", "sonuc": "35" }
-            ]
-        },
-        "examinationResults": {
-            "karinMuayenesi": [
-                { "parametre": "Karaciğer", "sonuc": "Normal" },
-                { "parametre": "Dalak", "sonuc": "Hafif büyümüş" }
-            ],
-            "nörolojikMuayene": [
-                { "parametre": "Refleks", "sonuc": "Normal" },
-                { "parametre": "Bilinç", "sonuc": "Normal" }
-            ]
-        }
-    },
-  {
-        "id": 3,
-        "name": "Mehmet Kaya",
-      "yas": "37",
-      "correctDiagnosis": "Tanı 3", 
-      "testResults": {
-          "Tam Kan Sayımı": [
-              { "parametre": "RBC", "sonuc": "4.5" },
-              { "parametre": "HGB", "sonuc": "14" },
-              { "parametre": "PLT", "sonuc": "130" }
-          ],
-          "Biyokimya": [
-              { "parametre": "Glukoz", "sonuc": "85" },
-              { "parametre": "ALT", "sonuc": "28" },
-              { "parametre": "AST", "sonuc": "32" }
-          ]
-      },
-      "examinationResults": {
-          "karinMuayenesi": [
-              { "parametre": "Karaciğer", "sonuc": "Normal" },
-              { "parametre": "Dalak", "sonuc": "Normal" }
-          ],
-          "nörolojikMuayene": [
-              { "parametre": "Refleks", "sonuc": "Normal" },
-              { "parametre": "Bilinç", "sonuc": "Normal" }
-          ]
-      }
-    },
-    {
-        "id": 4,
-        "name": "Zeynep Öztürk",
-        "yas": "28",
-        "correctDiagnosis": "Tanı 1", 
-        "testResults": {
-            "Tam Kan Sayımı": [
-                { "parametre": "RBC", "sonuc": "4.2" },
-                { "parametre": "HGB", "sonuc": "11.8" },
-                { "parametre": "PLT", "sonuc": "160" }
-            ],
-            "Biyokimya": [
-                { "parametre": "Glukoz", "sonuc": "92" },
-                { "parametre": "ALT", "sonuc": "22" },
-                { "parametre": "AST", "sonuc": "28" }
-            ]
-        },
-        "examinationResults": {
-            "karinMuayenesi": [
-                { "parametre": "Karaciğer", "sonuc": "Normal" },
-                { "parametre": "Dalak", "sonuc": "Normal" }
-            ],
-            "nörolojikMuayene": [
-                { "parametre": "Refleks", "sonuc": "Normal" },
-                { "parametre": "Bilinç", "sonuc": "Normal" }
-            ]
-        }
-    },
-    {
-        "id": 5,
-        "name": "Fatma Tekin",
-        "yas": "42",
-        "correctDiagnosis": "Tanı 1", 
-        "testResults": {
-            "Tam Kan Sayımı": [
-                { "parametre": "RBC", "sonuc": "4.3" },
-                { "parametre": "HGB", "sonuc": "12" },
-                { "parametre": "PLT", "sonuc": "145" }
-            ],
-            "Biyokimya": [
-                { "parametre": "Glukoz", "sonuc": "88" },
-                { "parametre": "ALT", "sonuc": "27" },
-                { "parametre": "AST", "sonuc": "31" }
-            ]
-        },
-        "examinationResults": {
-            "karinMuayenesi": [
-                { "parametre": "Karaciğer", "sonuc": "Normal" },
-                { "parametre": "Dalak", "sonuc": "Normal" }
-            ],
-            "nörolojikMuayene": [
-                { "parametre": "Refleks", "sonuc": "Normal" },
-                { "parametre": "Bilinç", "sonuc": "Normal" }
-            ]
-        }
-    },
-    {
-        "id": 6,
-        "name": "Ahmet Can",
-        "yas": "32",
-        "correctDiagnosis": "Tanı 1", 
-        "testResults": {
-            "Tam Kan Sayımı": [
-                { "parametre": "RBC", "sonuc": "4.9" },
-                { "parametre": "HGB", "sonuc": "13.2" },
-                { "parametre": "PLT", "sonuc": "155" }
-            ],
-            "Biyokimya": [
-                { "parametre": "Glukoz", "sonuc": "93" },
-                { "parametre": "ALT", "sonuc": "28" },
-                { "parametre": "AST", "sonuc": "33" }
-            ]
-        },
-        "examinationResults": {
-            "karinMuayenesi": [
-                { "parametre": "Karaciğer", "sonuc": "Normal" },
-                { "parametre": "Dalak", "sonuc": "Normal" }
-            ],
-            "nörolojikMuayene": [
-                { "parametre": "Refleks", "sonuc": "Normal" },
-                { "parametre": "Bilinç", "sonuc": "Normal" }
-            ]
-        }
-    },
     
+        {
+        "id": 1,
+        "name": "Yaşar Yaşamaz",
+        "yas": 32,
+        "cinsiyet": "Erkek",
+        "sikayet": "Şiddetli karın ağrısı",
+        "correctDiagnosis": "Akut Apandisit",
+        "paramedik": "Ahmet Yılmaz, 32 yaşında erkek hasta, acile şiddetli karın ağrısı ile başvurdu. Bilinci açık olup, önceki sağlık geçmişi ve ilaç kullanımı hakkında bilgi alınamadı. Vital bulguları incelendiğinde, kan basıncı 130/85 mmHg, kalp atış hızı 110 bpm, solunum hızı 20 nefes/dakika, vücut sıcaklığı 38.0°C ve oksijen saturasyonu ise 98% olarak ölçüldü. Hastanın solunum, dolaşım ve diğer vital bulguları şu anda stabil.",
+        "ipucu": "Hasta, şiddetli karın ağrısı şikayeti ile başvurdu. Fizik muayene ve tetkikler, akut apandisit şüphesini doğruladı. Acil cerrahi müdahale gerekiyor. Hasta IV sıvı replasman ve antibiyotik tedavisi alacak, acil apandektomi planlandı.",
+        "vitals": {
+            "nabız": 110,
+            "sistolik": 130,
+            "diastolik": 85,
+            "solunum": 20,
+            "ates": 38.0,
+            "sat": 98,
+            "ekg": "sinus"
+        },
+        "goruntuleme": {
+            "emergencyBrainCT": "Acil durumda beyin taraması yapıldı. Herhangi bir acil duruma işaret eden bulgular tespit edilmedi.",
+            "chestXRay": "Akciğerlerin durumunu değerlendirmek amacıyla acil röntgen çekildi. Normal sonuçlar elde edildi.",
+            "abdominalCT": "Karın bölgesinin acil BT taraması yapıldı. Acil bir duruma işaret eden bulgular saptanmadı.",
+            "traumaUS": "Travma sonucu oluşan iç yaralanmaları değerlendirmek amacıyla ultrasonografi (USG) yapıldı.",
+            "emergencyMR": "Acil durumda manyetik rezonans (MR) görüntüleme yapıldı. Anormallik tespit edilmedi.",
+            "thoracicCTAngiography": "Göğüs bölgesindeki damarları değerlendirmek amacıyla acil BT anjiyografi yapıldı. Anormallik tespit edilmedi.",
+            "emergencyBreastUS": "Acil durumda meme ultrasonografi (USG) taraması gerçekleştirildi. Anormallik tespit edilmedi.",
+            "pelvicCT": "Pelvik bölgenin acil BT taraması yapıldı. Acil bir duruma işaret eden bulgular saptanmadı.",
+            "traumaCranialCT": "Kafa travması sonucu oluşan potansiyel beyin hasarını değerlendirmek amacıyla acil kranial BT taraması yapıldı.",
+            "emergencySpinalCordMRI": "Acil durumda spinal kord hasarını değerlendirmek amacıyla manyetik rezonans (MR) görüntüleme yapıldı.",
+            "abdominalAngiography": "Beyin kan damarlarındaki anormallikleri değerlendirmek amacıyla acil abdominal anjiyografi yapıldı."
+        },
+        "testResults": {
+            "Tam Kan Sayımı": [
+                { "parametre": "WBC", "sonuc": 12 },
+                { "parametre": "HGB", "sonuc": 12 },
+                { "parametre": "PLT", "sonuc": 150 },
+                { "parametre": "RBC", "sonuc": 4.5 },
+                { "parametre": "HTC", "sonuc": 42 }
+            ],
+            "KCFT": [
+                { "parametre": "ALT", "sonuc": 45 },
+                { "parametre": "AST", "sonuc": 40 },
+                { "parametre": "GGT", "sonuc": 30 },
+                { "parametre": "T/D", "sonuc": "1,5/1,2" }
+            ],
+            "BFT": [
+                { "parametre": "creatinine", "sonuc": 0.8 },
+                { "parametre": "bloodUreaNitrogen", "sonuc": 15 },
+                { "parametre": "uricAcid", "sonuc": 4.5 }
+            ],
+            "Elektrolitler": [
+                { "parametre": "sodium", "sonuc": 140 },
+                { "parametre": "potassium", "sonuc": 4.2 },
+                { "parametre": "calcium", "sonuc": 9.0 },
+                { "parametre": "magnesium", "sonuc": 2.0 },
+                { "parametre": "phosphorus", "sonuc": 3.5 }
+            ],
+            "Lipit Paneli": [
+                { "parametre": "totalCholesterol", "sonuc": 180 },
+                { "parametre": "hdlCholesterol", "sonuc": 45 },
+                { "parametre": "ldlCholesterol", "sonuc": 120 },
+                { "parametre": "triglycerides", "sonuc": 80 }
+            ],
+            "Biyokimya": [
+                { "parametre": "Glukoz", "sonuc": 120 },
+                { "parametre": "totalProtein", "sonuc": 7.0 },
+                { "parametre": "albumin", "sonuc": 4.0 },
+                { "parametre": "globulin", "sonuc": 3.0 }
+            ],
+            "Koagülasyon": [
+                { "parametre": "PT", "sonuc": 14 },
+                { "parametre": "INR", "sonuc": 1.2 }
+            ],
+            "Kardiyak Enzimler": [
+                { "parametre": "troponin", "sonuc": 0.05 },
+                { "parametre": "CK-MB", "sonuc": 80 }
+            ],
+            "Kan Gazı": [
+                { "parametre": "pH", "sonuc": 7.4 },
+                { "parametre": "pCO2", "sonuc": 40 },
+                { "parametre": "pO2", "sonuc": 95 },
+                { "parametre": "bicarbonate", "sonuc": 24 }
+            ]
+        },
+        "examinationResults": {
+            "Karın Muayenesi": [
+                { "parametre": "FM yapıldı", "sonuc": "Geniş çaplı hassasiyet, defans+rebound mevcut. Karnı sağ alt bölgesine hafif basınç uygulanmasının ardından ağrıda artış gözlendi" }
+            ]
+        },
+        "treatments": {
+            // Tedavi detayları
+        },
+    },
+        {
+        "id": 2,
+        "name": "Zeynep Yılmaz",
+        "yas": 28,
+        "cinsiyet": "Kadın",
+        "sikayet": "Baş ağrısı ve bulantı",
+        "correctDiagnosis": "Migren",
+        "paramedik": "Zeynep Yılmaz, 28 yaşında kadın, baş ağrısı ve bulantı şikayeti ile geldi. Hastanın solunum, dolaşım ve diğer vital bulguları şu anda stabil.",
+        "ipucu": "Hasta migren atağı geçiriyor. Ağrı kontrolü ve dinlenme önerilir. Gerekirse migren ilaçları verilebilir.",
+        "vitals": {
+            "nabız": 90,
+            "sistolik": 120,
+            "diastolik": 80,
+            "solunum": 18,
+            "ates": 37.5,
+            "sat": 99,
+            "ekg": "af"
+        },
+        "testResults": {
+            "Tam Kan Sayımı": [
+                { "parametre": "WBC", "sonuc": 8 },
+                { "parametre": "HGB", "sonuc": 14 },
+                { "parametre": "PLT", "sonuc": 200 },
+                { "parametre": "RBC", "sonuc": 5.2 },
+                { "parametre": "HTC", "sonuc": 40 }
+            ],
+            "KCFT": [
+                { "parametre": "ALT", "sonuc": 30 },
+                { "parametre": "AST", "sonuc": 25 },
+                { "parametre": "GGT", "sonuc": 20 },
+                { "parametre": "T/D", "sonuc": "1.2/1.0" }
+            ],
+            "BFT": [
+                { "parametre": "Kreatin", "sonuc": 0.9 },
+                { "parametre": "BUN", "sonuc": 18 },
+            ],
+            "Elektrolitler": [
+                { "parametre": "Sodyum", "sonuc": 138 },
+                { "parametre": "Potasyum", "sonuc": 4.0 },
+                { "parametre": "Kalsiyum", "sonuc": 9.2 },
+            ],
+            "Lipit Paneli": [
+                { "parametre": "Total Kolesterol", "sonuc": 190 },
+                { "parametre": "HDL", "sonuc": 50 },
+                { "parametre": "LDL", "sonuc": 130 },
+                { "parametre": "Trigliserit", "sonuc": 85 }
+            ],
+            "Biyokimya": [
+                { "parametre": "Glukoz", "sonuc": 110 },
+                { "parametre": "totalProtein", "sonuc": 7.5 },
+                { "parametre": "Albumin", "sonuc": 4.2 },
+            ],
+            "Koagülasyon": [
+                { "parametre": "PT", "sonuc": 13 },
+                { "parametre": "INR", "sonuc": 1.1 }
+            ],
+            "Kardiyak Enzimler": [
+                { "parametre": "Troponin", "sonuc": 0.03 },
+                { "parametre": "CK-MB", "sonuc": 65 }
+            ],
+            "Kan Gazı": [
+                { "parametre": "pH", "sonuc": 7.38 },
+                { "parametre": "pCO2", "sonuc": 42 },
+                { "parametre": "pO2", "sonuc": 98 },
+                { "parametre": "HCO3", "sonuc": 26 }
+            ]
+        },
+        "goruntuleme": {},
+        "examinationResults": {
+            "Baş Muayenesi": [
+                { "parametre": "FM yapıldı", "sonuc": "Ağrılı nokta: alın ve şakak bölgesi. Göz muayenesinde anormallik yok." }
+            ],
+            "Nörolojik Muayene": [
+                { "parametre": "FM yapıldı", "sonuc": "Nörolojik muayene doğal, laterazan bulgu saptanmadı, gks 15 " },
+            ]
+        },
+        "treatments": {
+            "Acil Müdahale": "Ağrı kontrolü için analjezik verildi. Dinlenmesi önerildi."
+        }
+    }
     // Diğer hastalar buraya eklenir
 ]
+
+
+
 /*
 const emergencyPatientsDatabase = [
     {
@@ -224,157 +231,6 @@ const emergencyPatientsDatabase = [
     // Diğer acil hastalar buraya eklenir
 ]
 */
-const studentEmergencyPatientsDatabase = [
-    {
-        "id": 1,
-        "name": "Ahmet Yılmaz",
-        "age": 32,
-        "gender": "Erkek",
-        "admissionDate": "2023-06-15T11:20:00",
-        "chiefComplaint": "Şiddetli karın ağrısı",
-        "correctDiagnosis": "Tanı 1", 
-        "vitalBulgular": {
-            "kalpAtisHizi": 110,
-            "SistolikKanBasinci": 130,
-            "DiastolikKanBasinci": 85,
-            "solunumHizi": 20,
-            "vucutIsisi": 38.0,
-            "oksiSat": 98,
-        },
-        "emergencyTests": {
-            "acilGoruntuleme": {
-                "acilBeyinBT": "Acil durumda beyin taraması yapıldı. Herhangi bir acil duruma işaret eden bulgular tespit edilmedi.",
-                "akcigerRontgeni": "Akciğerlerin durumunu değerlendirmek amacıyla acil röntgen çekildi. Normal sonuçlar elde edildi.",
-                "karinBT": "Karın bölgesinin acil BT taraması yapıldı. Acil bir duruma işaret eden bulgular saptanmadı.",
-                "travmaUSG": "Travma sonucu oluşan iç yaralanmaları değerlendirmek amacıyla ultrasonografi (USG) yapıldı.",
-                "acilMR": "Acil durumda manyetik rezonans (MR) görüntüleme yapıldı. Anormallik tespit edilmedi.",
-                "toraksBTAngiografi": "Göğüs bölgesindeki damarları değerlendirmek amacıyla acil BT anjiyografi yapıldı.Anormallik tespit edilmedi",
-                "acilMemeUSG": "Acil durumda meme ultrasonografi (USG) taraması gerçekleştirildi. Anormallik tespit edilmedi.",
-                "pelvikBT": "Pelvik bölgenin acil BT taraması yapıldı. Acil bir duruma işaret eden bulgular saptanmadı.",
-                "travmaCranialCT": "Kafa travması sonucu oluşan potansiyel beyin hasarını değerlendirmek amacıyla acil kranial BT taraması yapıldı.",
-                "spinalCordMRI": "Acil durumda spinal kord hasarını değerlendirmek amacıyla manyetik rezonans (MR) görüntüleme yapıldı."
-            },
-            "bloodTests": {
-                "completeBloodCount": {
-                    "whiteBloodCellCount": 12000,
-                    "hemoglobin": 12,
-                    "plateletCount": 150000
-                },
-                "biochemistry": {
-                    "glucose": 120,
-                    "liverEnzymes": {
-                        "ALT": 45,
-                        "AST": 40
-                    }
-                }
-            },
-            "urineAnalysis": "Normal",
-            "coagulationTests": {
-                "PT": 14,
-                "INR": 1.2
-            },
-            "cardiacEnzymes": {
-                "troponin": 0.05,
-                "creatineKinase": 80
-            },
-            "thyroidFunctionTests": {
-                "TSH": 2.5,
-                "T4": 1.2
-            },
-            "infectiousDiseaseScreening": ["HIV", "Hepatit B", "Hepatit C"],
-            "arterialBloodGas": {
-                "pH": 7.4,
-                "pCO2": 40,
-                "pO2": 95,
-                "bicarbonate": 24
-            }
-        },
-        "physicalExamination": {
-            "karinMuayenesi": {
-                "genisCapliHassasiyet": "Geniş çaplı hassasiyet gözlemlendi. Hastanın karın bölgesinde genel bir değerlendirme yapıldı.",
-                "rebondHassasiyet": "Rebound tenderness tespit edildi. Karın bölgesine hafif basınç uygulanmasının ardından ağrıda artış gözlendi.",
-                "normalBagirsakSesleri": "Normal bağırsak sesleri duyuldu. Stetoskop kullanılarak karın bölgesindeki bağırsak sesleri değerlendirildi."
-            },
-            "norolojikMuayene": {
-                "kranyalSinirler": "Normal",
-                "motorFonksiyon": "Normal kuvvet ve kas tonusu gözlendi. Hastanın kas gücü ve tonusu normal sınırlar içerisindedir.",
-                "duyusalFonksiyon": "Normal duyu tepkisi gözlendi. Hastanın duyu tepkileri normaldir."
-            },
-            "solunumMuayenesi": {
-                "solunumPaterni": "Normal",
-                "akcigerSesleri": "Net",
-                "solunumHizi": "16 nefes/dakika",
-                "gogusGenisligi": "Simetrik"
-            },
-            "kardiyovaskularMuayene": {
-                "kalpAtisHizi": "Normal",
-                "kanBasinci": "120/80 mmHg"
-            },
-            "kasIskeletMuayenesi": {
-                "hareketAraligi": "Normal",
-                "kasKuvveti": "Normal",
-                "eklemStabilitesi": "Instabilite belirtisi yok",
-                "yurume": "Dengeli ve koordineli"
-            },
-            "dermatolojikMuayene": {
-                "ciltRengi": "Normal",
-                "lezyonlar": "Yok",
-                "sicaklik": "Sıcak",
-                "nem": "Normal cilt nemliliği"
-            },
-            "kulakBurunBogazMuayenesi": {
-                "isitme": "Normal",
-                "boğazGorunumu": "Normal"
-            },
-            "gastrointestinalMuayene": {
-                "istah": "Normal",
-                "dışkıGorunumu": "Normal"
-            },
-            "urogenitalMuayene": {
-                "idrarRengi": "Normal",
-                "genitalGorunum": "Normal"
-            },
-            "psikiyatrikMuayene": {
-                "ruhHali": "Normal",
-                "dusunceIcerigi": "Normal"
-            }
-        },
-        "preliminaryDiagnosis": "Akut apandisit",
-        "treatments": {
-            "medications": [
-                {
-                    "name": "IV Sıvı Replasman",
-                    "dosage": "500 mL",
-                    "route": "IV",
-                    "frequency": "Her 8 saatte bir"
-                },
-                {
-                    "name": "Antibiyotikler",
-                    "dosage": "Ceftriaxone 1 g IV",
-                    "route": "IV",
-                    "frequency": "Günde 2 kez"
-                },
-                {
-                    "name": "Analjezik",
-                    "dose": "500 mg",
-                    "frequency": "İhtiyaç halinde",
-                    "instructions": "Şiddetli ağrılar için kullanılabilir."
-                },
-                {
-                    "name": "Anti-emetik",
-                    "dosage": "Ondansetron 8 mg IV",
-                    "route": "IV",
-                    "frequency": "Günde 3 kez",
-                    "instructions": "Mide bulantısı durumunda kullanılabilir."
-                },
-            ],
-            "procedures": ["Acil apandektomi planlandı"]
-        },
-        "doctorNotes": "Hasta, şiddetli karın ağrısı şikayeti ile başvurdu. Fizik muayene ve tetkikler, akut apandisit şüphesini doğruladı. Acil cerrahi müdahale gerekiyor. Hasta IV sıvı replasman ve antibiyotik tedavisi alacak, acil apandektomi planlandı."
-    }
-
-    // Diğer acil hastalar buraya eklenir
-]
 /*
 const acilTanilar = {
     "acilDurumlar": [
@@ -542,11 +398,28 @@ app.get('/getExaminationResult/:patientId/:examinationName', (req, res) => {
     if (result !== null) {
         res.json(result);
     } else {
-        res.status(404).json({ error: 'Sonuç bulunamadı.' });
+        const defaultResult = normalMuayeneSonuclari[examinationName];
+
+        if (defaultResult) {
+            res.json(defaultResult);
+        } else {
+            res.status(404).json({ error: 'Sonuç bulunamadı.' });
+        }
     }
 });
 
 
+app.get('/getVitalResult/:patientId/:vitalName', (req, res) => {
+    const patientId = parseInt(req.params.patientId);
+    const vitalName = req.params.examinationName;
+    const result = findVitalResult(patientId, vitalName);
+
+    if (result !== null) {
+        res.json(result);
+    } else {
+        res.status(404).json({ error: 'Sonuç bulunamadı.' });
+    }
+});
 
 
 app.get('/getTestResult/:patientId/:testName', (req, res) => {
@@ -596,6 +469,10 @@ function findExaminationResult(patientId, testName) {
     return patient ? patient.examinationResults[testName] || null : null;
 }
 
+function findVitalResult(patientId, vitalName) {
+    const patient = findPatientById(patientId);
+    return patient ? patient.vitals[vitalName] || null : null;
+}
 
 
 

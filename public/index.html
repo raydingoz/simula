@@ -32,8 +32,10 @@
                     <div class="modal-content">
                         <span class="close" onclick="closeFinishModal()">&times;</span>
                         <label for="diagnosisSelect">Tanı Seçin:</label>
-                        <select id="diagnosisSelect"></select>
                         <button onclick="finishCase()">Tamam</button>
+                        <div id="diagnosisContainer">
+                            <select id="diagnosisSelect" size="20"></select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,21 +49,23 @@
             <div class="vitals">
                 <div class="vital">
                     <span class="label">Nabız:</span>
-                    <span class="value nabiz">80 bpm</span>
+                    <span class="value nabiz"  id="nabizSpan">00 bpm</span>
                 </div>
                 <div class="vital">
                     <span class="label">Tansiyon:</span>
-                    <span class="value tansiyon">120/80 mmHg</span>
+                    <span class="value tansiyon" id="taSpan">120/80 mmHg</span>
                 </div>
                 <div class="vital">
                     <span class="label">Satürasyon:</span>
-                    <span class="value saturasyon">98%</span>
+                    <span class="value saturasyon" id="satSpan">00%</span>
                 </div>
             </div>
             <canvas id="canvas" width="280" height="150"></canvas>
         </div>
     </div>
 
+
+    <div class="arka-plan-koyu"></div>
 
     <main>
 
@@ -86,12 +90,72 @@
         </section>
     </main>
 
+    <div class="secenek muayene">
+        <!-- Muayene içeriği buraya eklenecek -->
+        <label for="examinationNameSelect">Muayene Et</label>
+        <select id="examinationNameSelect">
+            <option value="Baş ve Boyun Muayenesi">Baş ve Boyun Muayenesi</option>
+            <option value="Göğüs Muayenesi">Göğüs Muayenesi</option>
+            <option value="Karın Muayenesi">Karın Muayenesi</option>
+            <option value="Kardiyovasküler Muayene">Kardiyovasküler Muayene</option>
+            <option value="Solunum Sistemi Muayenesi">Solunum Sistemi Muayenesi</option>
+            <option value="Genitoüriner Muayene">Genitoüriner Muayene</option>
+            <option value="Müsküloskeletal Muayene">Müsküloskeletal Muayene</option>
+            <option value="Dermatolojik Muayene">Dermatolojik Muayene</option>
+            <option value="Nörolojik Muayene">Nörolojik Muayene</option>
+            <option value="Göz Muayenesi">Göz Muayenesi</option>
+            <option value="Kulak Burun Boğaz Muayenesi">Kulak Burun Boğaz Muayenesi</option>
+            <!-- İhtiyacınıza göre ek fiziksel muayene adlarını buraya ekleyin -->
+        </select>
+        <button onclick="getExaminationResult()">Sonucu Getir</button>
+    </div>
+    <div class="secenek laboratuar">
+        <!-- Laboratuar içeriği buraya eklenecek -->
+        <label for="testNameSelect">Lab Testi Çalış</label>
+        <select id="testNameSelect">
+            <option value="Tam Kan Sayımı" class="test-option">Tam Kan Sayımı</option>
+            <option value="KCFT" class="test-option">KCFT</option>
+            <option value="BFT" class="test-option">BFT</option>
+            <option value="Elektrolitler" class="test-option">Elektrolitler</option>
+            <option value="Kan Gazı" class="test-option">Kan Gazı</option>
+            <option value="Biyokimya" class="test-option">Biyokimya</option>
+            <option value="Koagülasyon" class="test-option">Koagülasyon</option>
+            <option value="Kardiyak Enzimler" class="test-option">Kardiyak Enzimler</option>
+            <option value="Lipit Paneli" class="test-option">Lipit Paneli</option>
+            <!-- Diğer test adı seçeneklerini buraya ekleyebilirsiniz -->
+        </select>
+        <button onclick="getTestResult()">Sonucu Getir</button>
+    </div>
+
+    <div class="secenek müdahale">
+        <!-- Laboratuar içeriği buraya eklenecek -->
+        <label for="mudahaleSelect">Müdahale Et</label>
+        <select id="mudahaleSelect">
+            <option value="Monitorize Et" class="test-option">Monitorize Et</option>
+            <option value="IV mayi başla" class="test-option">IV mayi başla</option>
+            <!-- Diğer test adı seçeneklerini buraya ekleyebilirsiniz -->
+        </select>
+        <button onclick="mudahale()">Uygula</button>
+    </div>
+
+
+    <div class="secenek goruntuleme">
+        <!-- Görüntüleme içeriği buraya eklenecek -->
+        <label for="imageTypeSelect">Görüntüleme Türü Seçin</label>
+        <select id="imageTypeSelect">
+            <option value="bt">Bilgisayarlı Tomografi</option>
+            <option value="ekg">EKG</option>
+            <!-- Diğer görüntüleme adı seçeneklerini buraya ekleyebilirsiniz -->
+        </select>
+        <button onclick="getImageResult()">Sonucu Getir</button>
+    </div>
+
     <div class="secenekler">
 
         <div class="butonlar">
             <button data-secenek="anamnez"><i class="fa fa-heartbeat"></i>Anamnez</button>
             <button data-secenek="muayene"><i class="fa fa-stethoscope"></i>Muayene</button>
-            <button data-secenek="stabille"><i class="fa fa-medkit"></i>Müdahale</button>
+            <button data-secenek="müdahale"><i class="fa fa-medkit"></i>Müdahale</button>
             <button data-secenek="tanikoy"><i class="fa fa-check-circle"></i>Tanı Koy</button>
             <span></span>
             <button data-secenek="laboratuar"><i class="fa fa-flask"></i>Laboratuar</button>
@@ -102,38 +166,7 @@
         </div>
 
 
-        <div class="secenek muayene">
-            <!-- Muayene içeriği buraya eklenecek -->
-            <label for="examinationNameSelect">Muayene Et</label>
-            <select id="examinationNameSelect">
-                <option value="karinMuayenesi">Karın Muayenesi</option>
-                <option value="nörolojikMuayene">Nörolojik Muayene</option>
-                <!-- Diğer muayene adı seçeneklerini buraya ekleyebilirsiniz -->
-            </select>
-            <button onclick="getExaminationResult()">Sonucu Getir</button>
-        </div>
-        <div class="secenek laboratuar">
-            <!-- Laboratuar içeriği buraya eklenecek -->
-            <label for="testNameSelect">Lab Testi Çalış</label>
-            <select id="testNameSelect">
-                <option value="Tam Kan Sayımı" class="test-option">Tam Kan Sayımı</option>
-                <option value="Biyokimya" class="test-option">Biyokimya</option>
-                <!-- Diğer test adı seçeneklerini buraya ekleyebilirsiniz -->
-            </select>
-            <button onclick="getTestResult()">Sonucu Getir</button>
-        </div>
 
-
-        <div class="secenek goruntuleme">
-            <!-- Görüntüleme içeriği buraya eklenecek -->
-            <label for="imageTypeSelect">Görüntüleme Türü Seçin</label>
-            <select id="imageTypeSelect">
-                <option value="bt">Bilgisayarlı Tomografi</option>
-                <option value="ekg">EKG</option>
-                <!-- Diğer görüntüleme adı seçeneklerini buraya ekleyebilirsiniz -->
-            </select>
-            <button onclick="getImageResult()">Sonucu Getir</button>
-        </div>
 
 
     </div>
